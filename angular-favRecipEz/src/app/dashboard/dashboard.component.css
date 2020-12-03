@@ -1,0 +1,139 @@
+/* DashboardComponent's private CSS styles */
+.RecipeBoxDiv *{
+  /* border:1px solid goldenrod; */
+}
+
+h3{
+  padding: 5px;
+  /* background-color:goldenrod; */
+  border:3px solid goldenrod;
+}
+
+a{
+  border:1px solid goldenrod;
+
+}
+
+[class*='col-'] {
+    float: left;
+    padding:10px;
+    /* padding-right: 20px; */
+    padding-bottom: 20px;
+  }
+  [class*='col-']:last-of-type {
+    padding-right: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+  * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  h3 {
+    text-align: center;
+    margin-bottom: 0;
+  }
+  h4 {
+    position: relative;
+  }
+  .grid {
+    margin: 0;
+  }
+
+  .grid:after{
+    content:"";
+    display:table;
+    clear:both;
+  }
+  .col-1-4 {
+    width: 25%;
+    /* padding:10px; */
+    
+  }
+  .module {
+    padding: 10px 10px;
+    text-align: center;
+    color: #eee;
+    max-height: 120px;
+    min-width: 120px;
+    height:120px;
+    background-color: #654321;
+    border-radius: 7px;
+    
+    
+  }
+
+  .module > h4{
+    font-size:13px;
+  }
+  .module:hover {
+    background-color:rgb(43, 2, 2);
+    cursor: pointer;
+    
+    
+  }
+  .grid-pad {
+    padding: 10px 0;
+  }
+  .grid-pad > [class*='col-']:last-of-type {
+    padding-right: 10px; 
+  }
+
+  
+
+  .delete{
+    margin:10px;
+    background-color:rgba(64, 109, 23, 0.801);
+    color:floralwhite;
+    border-radius:5px;
+    font-size:10px;
+    padding:3px 7px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  
+
+  .delete:hover{
+    cursor: pointer;
+    background-color:green;
+  
+  }
+
+  .addRecipeButton{
+    margin:10px;
+    background-color:rgba(64, 109, 23, 0.801);
+    color:floralwhite;
+    border-radius:5px;
+    font-size:10px;
+    padding:5px 10px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+  }
+
+  .addRecipeButton:hover{
+    cursor: pointer;
+    background-color:green;
+  }
+
+  @media (max-width: 600px) {
+    .module {
+      font-size: 10px;
+      max-height: 75px; 
+    }
+    .col-1-4 {
+      width: 50%;
+      /* padding:10px; */
+      
+    }
+  }
+  @media (max-width: 1024px) {
+    .grid {
+      margin: 0;
+    }
+    .module {
+      min-width: 60px;
+
+    }
+  }

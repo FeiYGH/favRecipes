@@ -1,0 +1,91 @@
+<h2>All Recipes</h2>
+<app-recipe-search></app-recipe-search>
+<ul class="recipes">
+    <div *ngFor="let recipe of recipes" >
+        <a routerLink="/recipes/{{recipe.id}}" class="recipeIndexLinks">
+            {{recipe.title}}<br/>
+            {{recipe.description}}
+            <!-- <span class="badge">{{recipe.id}}: </span> -->
+
+            <!-- <div><span>description: </span>{{recipe.description}}</div>
+            <div><span>category: </span>{{recipe.category}}</div>
+            <div><span>cuisine type: </span>{{recipe.foodType}}</div>
+            <div><span>prep time: </span>{{recipe.prepTime}}</div>
+            <div><span>cook time: </span>{{recipe.cookTime}}</div>
+            <div><span:>servings: </span>{{recipe.servings}}</div>
+            <div><span>public: </span>{{recipe.publicRecipe}}</div>
+            <div><span>userID: </span>{{recipe.userID}}</div>
+            <div><span>calories: </span>{{recipe.calories}}</div>
+            <div><span>totalTime: </span>{{recipe.totalTime}}</div> 
+             <br/> -->
+        </a>
+    </div>
+</ul>
+
+
+
+
+<!-- <ul class="recipes">
+    <li *ngFor="let recipe of recipes" (click)="onSelect(recipe)" [class.selected]="recipe===selectedRecipe">
+        
+        <span class="badge">{{recipe.id}}: </span>{{recipe.title}}
+        <div><span>description: </span>{{recipe.description}}</div>
+        <div><span>category: </span>{{recipe.category}}</div>
+        <div><span>cuisine type: </span>{{recipe.foodType}}</div>
+        <div><span>prep time: </span>{{recipe.prepTime}}</div>
+        <div><span>cook time: </span>{{recipe.cookTime}}</div>
+        <div><span>servings: </span>{{recipe.servings}}</div>
+        <div><span>public: </span>{{recipe.publicRecipe}}</div>
+        <div><span>userID: </span>{{recipe.userID}}</div>
+        <div><span>calories: </span>{{recipe.calories}}</div>
+        <div><span>totalTime: </span>{{recipe.totalTime}}</div> 
+        <br/>
+        </li>
+</ul> -->
+
+
+<!-- <app-recipe [recipe]="selectedRecipe"></app-recipe> -->
+
+<!-- <div *ngIf="selectedRecipe">
+    <h2>{{selectedRecipe.title | uppercase}} Details</h2>
+    <div><span class="badge"> </span>{{selectedRecipe.title}}</div>
+    <div>
+        <span class="badge">{{recipe.id}}: </span>{{selectedRecipe.title}}
+        <div><span>description: </span>{{selectedRecipe.description}}</div>
+        <div><span>category: </span>{{selectedRecipe.category}}</div>
+        <div><span>cuisine type: </span>{{selectedRecipe.foodType}}</div>
+        <div><span>prep time: </span>{{selectedRecipe.prepTime}}</div>
+        <div><span>cook time: </span>{{selectedRecipe.cookTime}}</div>
+        <div><span>servings: </span>{{selectedRecipe.servings}}</div>
+        <div><span>public: </span>{{selectedRecipe.publicRecipe}}</div>
+        <div><span>userID: </span>{{selectedRecipe.userID}}</div>
+        <div><span>calories: </span>{{selectedRecipe.calories}}</div>
+        <div><span>totalTime: </span>{{selectedRecipe.totalTime}}</div> 
+        <br/>
+    </div>
+    <div>Edit title:
+        <input [(ngModel)]="selectedRecipe.title" placeholder="title"/>
+    </div>
+</div> -->
+
+
+
+<!-- <div>
+    <label>title:
+        <input [(ngModel)]="recipe.title" placeholder="name"/>
+    </label>
+</div>
+
+<h2>{{recipe.title | uppercase}}</h2>
+
+<div><span>id: </span>{{recipe.id}}</div>
+<div><span>description: </span>{{recipe.description}}</div>
+<div><span>category: </span>{{recipe.category}}</div>
+<div><span>cuisine type: </span>{{recipe.foodType}}</div>
+<div><span>prep time: </span>{{recipe.prepTime}}</div>
+<div><span>cook time: </span>{{recipe.cookTime}}</div>
+<div><span>servings: </span>{{recipe.servings}}</div>
+<div><span>public: </span>{{recipe.publicRecipe}}</div>
+<div><span>userID: </span>{{recipe.userID}}</div>
+<div><span>calories: </span>{{recipe.calories}}</div>
+<div><span>totalTime: </span>{{recipe.totalTime}}</div> -->

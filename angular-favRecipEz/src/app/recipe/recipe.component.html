@@ -1,0 +1,73 @@
+<div *ngIf="recipe">
+    <h2>{{recipe.title | uppercase}} Recipe <br/>
+        <span class="recipeDesc">{{recipe.description}}</span>
+    </h2>
+   
+    <!-- <div><span class="badge"> id: </span>{{recipe.id}}</div> -->
+    <div class="totalRecipeDiv">
+        <!-- <span class="badge">{{recipe.id}}: </span>{{recipe.title}} -->
+        <!-- <div><span>description: </span>{{recipe.description}}</div> -->
+        
+        <div class="desc1">
+            <div class="categories">
+                <h4><span class="recipeLabel ">category: </span><span class="recipeDetail recipeD">{{recipe.category}}</span></h4>
+                <h4><span class="recipeLabel ">cuisine type: </span><span class="recipeDetail recipeD">{{recipe.foodType}} </span></h4>
+            </div> 
+            <!-- <div class="divideLine">|</div> -->
+            <div class="cookTimes">
+                <h4><span class="recipeLabel">prep time: </span><span class="recipeDetail">{{recipe.prepTime}}</span></h4>
+                <h4><span class="recipeLabel">cook time: </span><span class="recipeDetail">{{recipe.cookTime}}</span> </h4>
+                <h4><span class="recipeLabel">total time: </span><span class="recipeDetail">{{recipe.totalTime}}</span> </h4>
+            </div>
+            
+        </div>
+        <div class="desc1">
+            <h4 class="secondRowDetails"><span class="recipeLabel">public:</span>&nbsp;&nbsp;<div [class.shared]="publicRecipe===true" [class.notShared]="publicRecipe===false"></div></h4>
+            <div class="filler">
+            </div>
+            <div class="portions">
+                <h4><span class="recipeLabel">servings: </span><span class="recipeDetail">{{recipe.servings}}</span></h4>
+                <h4><span class="recipeLabel">calories: </span><span class="recipeDetail">{{recipe.calories}}</span></h4>   
+            </div>
+        </div>
+        
+        
+        
+        <!-- <div><span>public: {{recipe.publicRecipe}}</span></div> -->
+        <!-- <div><span>prep time: </span>{{recipe.prepTime}}</div> -->
+        <!-- <div><span>cook time: </span>{{recipe.cookTime}}</div> -->
+        <!-- <div><span>userID: </span>{{recipe.userID}}</div> -->
+        <!-- <div><span>totalTime: </span>{{recipe.totalTime}}</div>  -->
+        <div class="ingredientsDiv">
+            <h3 class="InstIngH3">&nbsp;&nbsp;Ingredients</h3>
+            <ul class="ingredients">
+                <li *ngFor="let ingredient of ingredients">
+                    <p>
+                        <!-- <span class="ingred">{{ingredient.ingredientStr}}</span> -->
+                        <span class="ingred">{{ingredient.ingredientStr}}</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <br/>
+        <div class="instructionsDiv">
+            <h3 class="InstIngH3">&nbsp;&nbsp;Instructions</h3>
+            <ol class="instructions">
+                <li *ngFor="let instruction of instructions">
+                    <p>
+                        <!-- <span class="instruction">{{instruction.instructionLine}}</span> -->
+                        <span class="instruction">{{instruction.instructionLine}}</span>
+                    </p>
+                </li>
+            </ol>
+        </div>
+        <br/>
+        <button (click)="goBack()">Go Back</button>
+        <!-- <button (click)="save()">Save Changes</button> -->
+    </div>
+    
+    <!-- <div>Edit title:
+        <input [(ngModel)]="recipe.title" placeholder="title"/>
+    </div> -->
+    
+</div>

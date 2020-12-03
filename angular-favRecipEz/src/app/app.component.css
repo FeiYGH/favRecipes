@@ -1,0 +1,68 @@
+
+
+.homepage{
+    margin:10px;
+    margin-top:50px;
+  padding:30px;
+  z-index:5;
+  background-color:floralwhite;
+  opacity:95%;
+
+}
+
+h1{
+    margin:0px;
+    color:#008080;
+    color:#046b6d;
+    border-bottom:3px solid transparent;
+}
+
+.h1Ease{
+  color:coral
+}
+
+h1:focus{
+  outline:none;
+}
+
+h1:hover{
+  cursor: pointer;
+  /* border-bottom:3px solid #654321; */
+}
+
+nav{
+  display:flex;
+  padding:7px 10px;
+  /* border:1px solid blue; */
+  justify-content: space-between;
+  background-color:rgba(64, 109, 23, 0.801);
+  
+}
+
+nav > a{
+  text-decoration: none;
+  color:floralwhite;
+  border-bottom:2px solid transparent;
+  
+}
+
+nav > a:hover{
+  color:#654321;
+  border-bottom:2px solid #654321;
+
+}
+
+.logoutALink:hover{
+  cursor: pointer;
+  border-bottom:2px solid floralwhite;
+}
+
+.welcomeLine{
+  font-size: 14px;
+  
+  float:right;
+
+  /* margin-left:90%; */text-align:right;
+
+  
+}

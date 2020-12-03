@@ -1,0 +1,142 @@
+h2{
+    color:#654321;
+}
+
+.InstIngH3{
+    color:rgba(64, 109, 23, 0.801);
+}
+
+.totalRecipeDiv{
+    border:3px solid teal;
+    padding:10px;
+}
+
+.instructionsDiv{
+    border:1px solid#654321;
+    margin-top:10px;
+}
+
+.ingredientsDiv{
+    border:1px solid#654321;
+    
+}
+
+.recipeDesc{
+    font-size:12px;
+    margin-left:15%;
+}
+
+.desc1{
+    display:flex;
+    justify-content: space-between;
+    border:1px solid #654321;
+    /* background-color:pink; */
+}
+
+.cookTimes{
+    display:flex;
+    justify-content: flex-end;
+    width:50%;
+    /* border: 1px solid black; */
+}
+
+.cookTimes > h4{
+    margin: 5px 10px;
+    /* border:1px solid #654321; */
+    padding:5px;
+}
+
+.categories{
+    display:flex;
+    /* justify-content: space-between; */
+    /* border: 1px solid black; */
+
+}
+.categories > h4{
+    margin: 5px 10px;
+    border:1px dotted rgba(64, 109, 23, 0.801);
+    
+    padding:5px;
+}
+
+.filler{
+    width:70%;
+}
+.portions{
+    display:flex;
+    justify-content: flex-end;
+    /* border:1px solid red; */
+    
+    
+}
+
+.portions > h4{
+    margin: 5px 10px;
+    /* border:1px solid coral; */
+    padding:5px;
+    /* border:1px solid #654321; */
+
+}
+
+.recipeLabel{
+    font-variant:small-caps;
+}
+
+
+
+.recipeDetail{
+    color:coral;
+    font-size:14px;
+    min-height: 100px;
+}
+
+.divideLine{
+    font-size:30px;
+    color:teal;
+}
+.secondRowDetails{
+    display:flex;
+    margin-left:12px;
+    /* margin: 5px 10px; */
+}
+
+.shared{
+   background-image: url('../../../favRecipEz Pictures/checkbox-icon.png');
+   background-size:cover;
+   
+   margin-top:3px;
+   border-radius:5px;
+   width:16px;
+   height:16px;
+    
+}
+
+.notShared{
+    background-image: url('../../../favRecipEz Pictures/notPublic2.png');
+   background-size:cover;
+   margin-top:3px;
+   border-radius:5px;
+   width:16px;
+   height:16px;
+}
+
+button{
+   
+    margin:10px;
+    background-color:rgba(64, 109, 23, 0.801);
+    color:floralwhite;
+    border-radius:5px;
+    font-size:12px;
+    padding:7px 14px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+      
+    
+button:hover{
+    cursor: pointer;
+    background-color:green;
+
+}
+    
+     

@@ -1,0 +1,17 @@
+<div class="loginDiv" *ngIf="!loggedIn">
+    <h3>LOGIN</h3>
+    <form 
+    (ngSubmit)="onSubmit()" 
+    >
+        <label>Username:</label>
+        <input type="text" name="username" [(ngModel)]="loginData.username"/><br/>
+        <label>Password:</label>
+        <input type="password" name="password" [(ngModel)]="loginData.password" /><br/>
+        <button class="signInBtn">Sign In</button>
+    </form> 
+    <p class="errorMsgs">{{errorMsgs[0]}}</p>
+    <p class="errorMsgs">{{errorMsgs[1]}}</p>
+    <h4>{{registSuccessMsg}}</h4>
+   
+</div>
+

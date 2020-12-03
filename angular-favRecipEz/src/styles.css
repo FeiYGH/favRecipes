@@ -1,0 +1,7 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    margin:2em;
+    padding:0px;
+    background-image: url('../favRecipEz Pictures/front-page-purple-pexels-karolina-grabowska.jpg');
+    background-size:cover;
+}

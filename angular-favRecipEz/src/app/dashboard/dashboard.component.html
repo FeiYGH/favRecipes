@@ -1,0 +1,26 @@
+
+<div *ngIf="loggedIn()" class="RecipeBoxDiv">
+    <h3>Recipe Box -- Your Saved Recipes</h3>
+    <app-recipe-search></app-recipe-search>
+    <div class="grid grid-pad">
+        <a *ngFor="let recipe of recipes" class="col-1-4"
+            >
+            <div class="module recipe" routerLink="/recipes/{{recipe.id}}"> 
+                <h4>{{recipe.title}}</h4>
+            </div>
+            <button class="delete" title="delete recipe" (click)="delete(recipe)">
+                Delete
+            </button>
+        </a> 
+        <h4>{{noRecipesMsg}}</h4>
+        
+    </div>
+    <br/>
+    <button class="addRecipeButton" (click)="addRecipe()" >Add a Recipe</button>
+    
+    
+</div>
+<div *ngIf="!loggedIn()" class="RecipeBoxDiv">
+    <h3>Please Sign In or Register!</h3>
+</div>
+

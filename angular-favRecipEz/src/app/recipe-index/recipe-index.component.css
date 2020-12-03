@@ -1,0 +1,39 @@
+
+.recipes{
+    display: flex;
+    flex-wrap:wrap;
+    background-color:rgba(64, 109, 23, 0.801);
+    justify-content:space-evenly;
+    padding:0px;
+}
+
+.recipes > div{
+    background-color:#654321;
+    width: 150px;
+    min-height:100px;
+    margin: 10px;
+    text-align:center;
+    font-size:20px;
+    padding:10px 10px;
+    border: 2px solid rgb(53, 48, 48);
+    
+    
+
+  }
+
+  .recipes > div:hover{
+    border: 2px solid cornsilk;
+      
+  }
+
+  
+
+  .recipeIndexLinks{
+    text-decoration: none;
+    color:floralwhite;
+  }
+
+  .recipeIndexLinks:hover{
+      
+      border-bottom: 2px solid coral;
+  }

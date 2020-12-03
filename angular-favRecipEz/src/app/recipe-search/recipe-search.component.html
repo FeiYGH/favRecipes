@@ -1,0 +1,12 @@
+<div id="search-component">
+    <h4><label for="search-box">Recipe Search</label></h4>
+    <input #searchBox id="search-box" (input)="search(searchBox.value)"/>
+    <ul class="search-result">
+        <!-- recipes$ == indicates it's an Observable, not an arr -->
+        <li *ngFor="let recipe of recipes$ | async">
+            <a routerLink="/recipes/{{recipe.id}}">
+                {{recipe.title}}
+            </a>
+        </li>
+    </ul>
+</div>

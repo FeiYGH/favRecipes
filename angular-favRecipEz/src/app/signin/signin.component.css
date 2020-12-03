@@ -1,0 +1,69 @@
+.loginDiv{
+    /* background-image: url('../../../favRecipEz Pictures/blue-salads.jpg');
+    background-size:cover; */
+    border: 2px solid #046b6d;
+    margin-top:15px;
+    
+}
+
+h3{
+    padding-left:15px;
+    /* border: 1px solid blue; */
+    color:#046b6d;
+}
+
+.loginDiv h3, form, label, input, h4{
+    box-sizing:border-box;
+    padding:5px 5px;
+    margin:10px 5px;
+    text-align: center;
+    /* border:1px solid skyblue; */
+}
+
+input{
+    text-align:left;
+}
+
+form{
+    margin-bottom:0px;
+    padding-bottom:0px;
+}
+label{
+    color:coral;
+}
+
+input{
+    width:45%;
+}
+
+input:focus{
+    outline: 2px solid coral;
+}
+
+.signInBtn{
+    margin:10px;
+    background-color:rgba(64, 109, 23, 0.801);
+    color:floralwhite;
+    border-radius:5px;
+    padding:10px 20px;
+    width:25%;
+    
+  }
+
+  .signInBtn:hover{
+    cursor: pointer;
+    background-color:sandybrown;
+  }
+
+  .signInBtn:active{
+      outline:2px solid coral;
+      border: 2px solid coral;
+  }
+
+  p.errorMsgs{
+      color:red;
+      font-size:12px;
+      text-align:center;
+      margin:0px;
+      padding:0px;
+  }

@@ -1,0 +1,19 @@
+<div class="registerDiv" *ngIf="!loggedIn">
+    <h3 id="regHeader">&nbsp; User Registration</h3>
+    <form
+        (ngSubmit)="onSubmit()"
+    >   
+        <label>Pick a username: </label>
+        <input name="username" [(ngModel)]="registData.username"/><br/>
+        <label>Enter a valid email: </label>
+        <input type="email" name="email" [(ngModel)]="registData.email"/><br/>
+        <label>Enter a password between 6 and 40 characters. </label>
+        <input type="password" name="password" [(ngModel)]="registData.password"><br/>
+        <label>Confirm your password</label>
+        <input type="password" name="confPswd" [(ngModel)]="confirmPasswd"/><br/>
+        <button class="registBtn">Register</button>
+    </form>
+    <span className="errorMsgs">{{errorMsgs[0]}}</span><br/>
+    <span className="errorMsgs">{{errorMsgs[1]}}</span><br/>
+    <span className="errorMsgs">{{errorMsgs[2]}}</span>
+</div>

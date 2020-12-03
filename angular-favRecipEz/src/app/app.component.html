@@ -1,0 +1,16 @@
+<div class="homepage">
+    <h1><span routerLink="/recipes">{{title}}</span><span class="h1Ease" routerLink="/recipes">{{title2}}</span><span class="welcomeLine" *ngIf="isLoggedIn()">Welcome, {{welcomeUser}}!</span></h1>
+    <!-- <app-recipe-index></app-recipe-index> -->
+    <nav>
+        <a *ngIf="isLoggedIn()" routerLink="/dashboard" class="navLinks">My Recipe Box</a>
+        <a routerLink="/recipes" class="navLinks">Recipe Index</a> &nbsp;
+        <a *ngIf routerLink="/addRecipe">AddRecipe</a> &nbsp;
+        <a *ngIf="!isLoggedIn()" routerLink="/signin">Sign In</a> &nbsp;
+        <a *ngIf="!isLoggedIn()" routerLink="/register">Register</a> &nbsp;
+        <a class="logoutALink" *ngIf="isLoggedIn()"  (click)="logout()">Log Out</a>    
+    </nav>
+    <router-outlet></router-outlet>
+    <app-messages></app-messages>
+    <br/>
+    
+</div>

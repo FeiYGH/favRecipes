@@ -1,0 +1,79 @@
+<h2>Add a new Recipe</h2>
+<div class="addRecipeDiv" > 
+    <div class="addRecipeDetails">
+        <div class="greenRecipeDetails">
+            <label class="firstBox">*Title: </label>
+            <input [(ngModel)]="recipe.title" placeholder="Recipe Title"/>
+            <br/>
+        
+            <label class="firstBox">Description:</label>    
+            <input #recipeDescription type="text" [(ngModel)]="recipe.description" placeholder="Recipe Description"/>
+            <br/>
+        
+            <label class="firstBox">*Category: </label>
+            <!-- <input #recipeCategory [(ngModel)]="recipe.category" placeholder="category"/> -->
+            <select id="recipeCategories" name="category"  [(ngModel)]="recipe.category">
+                <option value="none" selected disabled> 
+                    Select a Category 
+                </option> 
+                <option value="Beef">Beef</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Chicken">Chicken</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Goat">Goat</option>
+                <option value="Lamb">Lamb</option>
+                <option value="Miscellaneous" >Miscellaneous</option>
+                <option value="Pasta">Pasta</option>
+                <option value="Pork">Pork</option>
+                <option value="Seafood">Seafood</option>
+                <option value="Side">Side</option>
+                <option value="Starter">Starter</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Vegetarian">Vegetarian</option>
+            </select>
+            
+            
+            <label class="firstBox">Cuisine Type:</label>
+            <input  #recipeFoodType [(ngModel)]="recipe.foodType" placeholder="Recipe Cuisine Type"/>
+            <br/>
+        
+            <label class="firstBox">Prep Time:  </label>
+            <input type="number" #recipePrepTime [(ngModel)]="recipe.prepTime" placeholder="Recipe Prep Time"/>
+            <label class="firstBox">Cook Time: </label>
+            <input type="number" #recipeCookTime [(ngModel)]="recipe.cookTime" placeholder="Recipe Cook Time"/>
+            <label class="firstBox">Total Time:</label>
+            <input type="number" #recipeTotalTime [(ngModel)]="recipe.totalTime" placeholder="totalTime">
+            <br/>
+        
+            <label class="firstBox">Servings:</label>
+            <input #recipeServings [(ngModel)]="recipe.servings" placeholder="Recipe Servings"/>
+            <label class="firstBox">Calories: </label>
+            <input #recipeCalories [(ngModel)]="recipe.calories" placeholder="Calories">   
+            <br/>
+        </div>
+    </div>
+   
+    <label>Display recipe to public?</label>
+    <input type="checkbox" #recipeFoodType [(ngModel)]="recipe.publicRecipe">
+    <br/><br/>
+
+    <!-- Ingredients and corrponding measurements-->
+    <label><span class="required">*</span>Enter your ingredients one at a time or paste them into the box below.</label><br/>
+    <span class="moreInfo">**Please put a single ingredient and corresponding measurement on one line.**</span>
+    <br/> 
+    <textarea ref-textarea [(ngModel)]="ingredients" rows="10"  cols="50" placeholder="Ex. 1 tbsp. salt">
+    </textarea><br/>
+   
+    <br/><br/>
+    <!-- Instructions-->
+    <label><span class="required">*</span>Enter your directions one step at a time or paste them into the box below.</label><br/>
+    <span class="moreInfo">**Please start each instruction on a new line.**</span>
+    <br/>
+    <textarea #recipeDirections  [(ngModel)]="instructions" rows="10" cols="50" placeholder="Ex. Mix the flour, cocoa power, eggs, and sugar together.">
+    </textarea>
+     <br/>
+    
+     <button (click)="add()">
+        Add Recipe
+    </button>
+</div>
