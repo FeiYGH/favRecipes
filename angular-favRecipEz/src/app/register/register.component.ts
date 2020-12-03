@@ -83,8 +83,11 @@ export class RegisterComponent implements OnInit {
       valid = false;
     }else if(this.registData.password.length < 6 || this.registData.password.length > 40){
       this.errorMsgs[idx]+="* Password must be between 6 and 40 characters.\n";
-    }else if(this.registData.password !== this.confirmPasswd){
+      valid = false;
+    }
+    if(this.registData.password !== this.confirmPasswd){
       this.errorMsgs[idx] += " Passwords must match.";
+      valid = false;
     }
     return valid; 
   }
