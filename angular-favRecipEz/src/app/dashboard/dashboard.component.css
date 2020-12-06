@@ -83,7 +83,7 @@ a{
 
   
 
-  .delete{
+  .delete, .edit{
     margin:10px;
     background-color:rgba(64, 109, 23, 0.801);
     color:floralwhite;
@@ -94,8 +94,7 @@ a{
   }
 
   
-
-  .delete:hover{
+  .delete:hover, .edit:hover{
     cursor: pointer;
     background-color:green;
   

@@ -2,7 +2,7 @@ package com.talentpath.favRecipEzSpringBt.models;
 
 //@Entity
 //@Table(name="Dirs")
-public class Direction {
+public class DirectionNotUsing {
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
@@ -39,7 +39,7 @@ public class Direction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Direction direction = (Direction) o;
+        DirectionNotUsing direction = (DirectionNotUsing) o;
 
         if (id != direction.id) return false;
         return instructionLine != null ? instructionLine.equals(direction.instructionLine) : direction.instructionLine == null;

@@ -16,13 +16,13 @@ public class Recipe {
     String description;
     String category;
     String foodType;
-    int prepTime;
-    int cookTime;
-    double servings;
-    boolean publicRecipe;
-    int userID;
-    int calories;
-    int totalTime;
+    Integer prepTime;
+    Integer cookTime;
+    Double servings;
+    Boolean publicRecipe;
+    Integer userID;
+    Integer calories;
+    Integer totalTime;
 
 
     public boolean isPublicRecipe() {

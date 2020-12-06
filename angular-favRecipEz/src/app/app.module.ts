@@ -20,6 +20,7 @@ import { RecipeSearchComponent } from './recipe-search/recipe-search.component';
 import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthInterceptor } from './auth-interceptor';
+import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
 
 
 @NgModule({
@@ -32,10 +33,12 @@ import { AuthInterceptor } from './auth-interceptor';
     AddRecipeComponent,
     RecipeSearchComponent,
     SigninComponent,
-    RegisterComponent
+    RegisterComponent,
+    EditRecipeComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,

@@ -9,8 +9,11 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import javax.sound.midi.Soundbank;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,7 +48,7 @@ public class PostgresDao implements FavRecipEzDao {
 
         List<Integer> insertedIds = template.query("INSERT INTO public.\"Directions\"(\n" +
                 "\t\"instructionLine\", \"recipeID\")\n" +
-                "\tVALUES ('"+newInstruct.getInstructionLine()+"', "+newInstruct.getRecipeID()+") returning \"ID\";", new InstAndIngredIDMapper());
+                "\tVALUES (?,?) returning \"ID\";", new InstAndIngredIDMapper(), newInstruct.getInstructionLine(), newInstruct.getRecipeID());
         newInstruct.setID(insertedIds.get(0));
         return newInstruct;
     }
@@ -54,13 +57,13 @@ public class PostgresDao implements FavRecipEzDao {
     public Ingredient addIngredient(Ingredient newIngred) {
         //      if(line == null){
         //            throw new NullIngredientException("Received null for ingredient string.");
-        //
+
         List<Integer> insertedIds = template.query("INSERT INTO public.\"Ingredients\"(\n" +
                 "\t\"ingredientStr\", \"recipeID\")\n" +
-                "\tVALUES ('"+newIngred.getIngredientStr()+"', "+newIngred.getRecipeID()+") returning \"ID\";", new InstAndIngredIDMapper());
+                "\tVALUES (?,?) returning \"ID\";",new InstAndIngredIDMapper(), newIngred.getIngredientStr(), newIngred.getRecipeID() );
         newIngred.setID(insertedIds.get(0));
         return newIngred;
-    }
+    };
 
     @Override
     public int deleteRecipe(Integer recipeID) {
@@ -126,9 +129,13 @@ public class PostgresDao implements FavRecipEzDao {
         //      if(recipe == null){
         //            throw new NullRecipeException("Received null for recipe object.");
         //        }
+//        List<Integer> insertedIds = template.query("INSERT INTO public.\"Recipes\"(\n" +
+//                "\ttitle, description, category, \"foodType\", \"prepTime\", \"cookTime\", servings, \"publicRecipe\", \"userID\", calories, \"totalTime\")\n" +
+//                "\tVALUES ('"+recipe.getTitle()+"', '"+recipe.getDescription()+"', '"+recipe.getCategory()+"', '"+recipe.getFoodType()+"', "+recipe.getPrepTime()+", "+recipe.getCookTime() +", "+recipe.getServings()+", "+recipe.isPublicRecipe()+", "+recipe.getUserID()+", "+recipe.getCalories()+", "+recipe.getTotalTime()+") returning \"ID\";", new RecipeIDMapper());
+
         List<Integer> insertedIds = template.query("INSERT INTO public.\"Recipes\"(\n" +
                 "\ttitle, description, category, \"foodType\", \"prepTime\", \"cookTime\", servings, \"publicRecipe\", \"userID\", calories, \"totalTime\")\n" +
-                "\tVALUES ('"+recipe.getTitle()+"', '"+recipe.getDescription()+"', '"+recipe.getCategory()+"', '"+recipe.getFoodType()+"', "+recipe.getPrepTime()+", "+recipe.getCookTime() +", "+recipe.getServings()+", "+recipe.isPublicRecipe()+", "+recipe.getUserID()+", "+recipe.getCalories()+", "+recipe.getTotalTime()+") returning \"ID\";", new RecipeIDMapper());
+                "\tVALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) returning \"ID\";", new RecipeIDMapper(), recipe.getTitle(), recipe.getDescription(), recipe.getCategory(),recipe.getFoodType(), recipe.getPrepTime(), recipe.getCookTime(), recipe.getServings(), recipe.isPublicRecipe(), recipe.getUserID(), recipe.getCalories(), recipe.getTotalTime());
         recipe.setId(insertedIds.get(0));
         return recipe;
     }

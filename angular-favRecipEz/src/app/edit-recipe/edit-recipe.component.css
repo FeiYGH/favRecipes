@@ -1,0 +1,79 @@
+.addRecipeDiv *{
+    box-sizing:border-box;
+    margin: 10px 10px 10px 0px;
+}
+
+input[type=text], input, select, textarea {
+    padding: 4px 7px 3px 7px;
+
+}
+
+input[type=text]{
+    width:80%;
+}
+
+input[type=number]{
+    width:50px;
+}
+
+input#recipePrepTime{
+    width:50px;
+}
+
+input[type=text]:focus, input:focus, select:focus, textarea:focus {
+    outline: 2px solid coral;
+    
+}
+
+#recipeDescription{
+    width:50%;
+}
+
+.addRecipeDetails{
+    background-image: url('../../../favRecipEz Pictures/recipe-tile.jpg');
+    background-size:cover;
+    padding:7px 7px;
+    border:3px solid rgba(64, 109, 23, 0.801);
+
+}
+
+label.firstBox{
+    background-color:rgba(64, 109, 23, 0.801);
+    background-color:floralwhite;
+    color:coral;
+    padding:4px 7px;
+    border: 1px solid rgba(64, 109, 23, 0.801);
+}
+
+.moreInfo{
+    font-size:12px;
+}
+
+button{
+    margin:10px;
+    background-color:rgba(64, 109, 23, 0.801);
+    color:floralwhite;
+    border-radius:5px;
+    padding:7px 13px;
+  }
+
+  button:hover{
+    cursor: pointer;
+    background-color:green;
+  }
+
+  label .required{
+      color:coral;
+      margin-right:1px;
+  }
+
+  .addRecipeDetails .requiredStar{
+      color:coral;
+      margin:10px 2px 10px 0px;
+      font-size:12px;
+    }
+
+    .addRecipeDetails .requiredNote{
+        font-size:12px;
+        color:red;
+    }

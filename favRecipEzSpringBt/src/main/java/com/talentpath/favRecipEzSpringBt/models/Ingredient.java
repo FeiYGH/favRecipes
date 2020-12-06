@@ -3,7 +3,7 @@ package com.talentpath.favRecipEzSpringBt.models;
 public class Ingredient {
     int ID;
     String ingredientStr;
-    int recipeID;
+    Integer recipeID;
 
     public Ingredient(){};
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Data, NavigationExtras, Router } from '@angular/router';
 import {Recipe} from '../recipe';
 import {RecipeService} from '../recipe.service';
 import { TokenStorageService } from '../token-storage.service';
@@ -44,8 +44,11 @@ export class DashboardComponent implements OnInit {
           });
       
         });
-      
     })
+  }
+
+  edit(recipe:Recipe):void{
+    this.routr.navigate(["/editRecipe"], {queryParams: {"recipeID": recipe.id}});
   }
 
   loggedIn():boolean{
