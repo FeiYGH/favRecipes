@@ -77,3 +77,11 @@ button{
         font-size:12px;
         color:red;
     }
+
+    .visible{
+        display:block;
+    }
+
+    .hidden{
+        display:none;
+    }

@@ -31,8 +31,6 @@
             </div>
         </div>
         
-        
-        
         <!-- <div><span>public: {{recipe.publicRecipe}}</span></div> -->
         <!-- <div><span>prep time: </span>{{recipe.prepTime}}</div> -->
         <!-- <div><span>cook time: </span>{{recipe.cookTime}}</div> -->
@@ -62,8 +60,8 @@
             </ol>
         </div>
         <br/>
-        <button (click)="goBack()">Go Back</button>
-        <!-- <button (click)="save()">Save Changes</button> -->
+        <button (click)="goBack()">Go Back</button> 
+        <button *ngIf="userOwnsRecipe===true" (click)="edit()">Edit Recipe</button>
     </div>
     
     <!-- <div>Edit title:

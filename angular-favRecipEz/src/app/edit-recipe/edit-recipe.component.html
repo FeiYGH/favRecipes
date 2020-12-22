@@ -1,4 +1,4 @@
-<h2>Edit Recipe: {{recipeToEdit.title}}</h2>
+<h2 *ngIf="recipeToEdit">Edit Recipe: {{recipeToEdit.title}}</h2>
 <div class="addRecipeDiv" > 
     <div class="addRecipeDetails">
         <div class="greenRecipeDetails">
@@ -58,22 +58,67 @@
     <br/><br/>
 
     <!-- Ingredients and corrponding measurements-->
-    <label><span class="required">*</span>Enter your ingredients one at a time or paste them into the box below.</label><br/>
+    <label><span class="required">*</span>These are your current ingredients for editing. You may delete or change. If you want to add, please put in the "Additional Ingredients" box.</label><br/>
+    <span class="moreInfo">**Ingredients will be ordered in the order you put them.**</span><br/>
     <span class="moreInfo">**Please put a single ingredient and corresponding measurement on one line.**</span>
     <br/> 
-    <textarea ref-textarea [(ngModel)]="ingredients" rows="10"  cols="50" placeholder="Ex. 1 tbsp. salt">
+    
+    <textarea ref-textarea rows="10"  cols="50" placeholder="Ex. 1 tbsp. salt" [(ngModel)]="allIngredients">{{allIngredients}}
     </textarea><br/>
-   
+
+    <!-- To Add Additional Ingredients-->
+    <label>Additional Ingredients?</label><br/>
+    <span class="moreInfo">**Please put a single ingredient and corresponding measurement on one line.**</span>
+    <br/> 
+    <textarea ref-textarea rows="10"  cols="50" placeholder="Ex. 1 tbsp. salt" [(ngModel)]="ingredientsToAdd">
+    </textarea><br/>
+    <label>Please check if no ingredient edits or additions</label>
+    <input type="checkbox" #recipeFoodType [(ngModel)]="noChangedIngredients"><br/>
+    <span class="moreInfo">**If checked, any edits to ingredients will not be processed.**</span><br/><br/>
+    
+
     <br/><br/>
     <!-- Instructions-->
-    <label><span class="required">*</span>Enter your directions one step at a time or paste them into the box below.</label><br/>
-    <span class="moreInfo">**Please start each instruction on a new line.**</span>
-    <br/>
-    <textarea #recipeDirections  [(ngModel)]="instructions" rows="10" cols="50" placeholder="Ex. Mix the flour, cocoa power, eggs, and sugar together.">
-    </textarea>
-     <br/>
-    
-     <button (click)="edit()" >
+    <!-- Composite and Individual View Buttons-->
+    <button (click)="selectCompView()">Composite View</button>&nbsp;
+    <button (click)="selectIndView()" >Indvidiual Instructions</button>
+    <!-- Instructions Individual View-->
+    <div [class.visible]="individualView===true" [class.hidden]="individualView===false">
+        <label><span class="required">*</span>Edit your directions.</label>
+        <br/>
+        <span class="moreInfo">**If no change, please click on "No change to ingredients?" checkbox.**</span>
+        <br/>
+        <ul>
+            <div *ngFor="let instruction of instructions; let i = index" [attr.data-index]="i">
+                <textarea #recipeDirections rows="3" cols="45"  [(ngModel)]="instruction.instructionLine">{{instruction.instructionLine}}
+                </textarea>
+                <div><button (click)="moveUp(i)">Up</button><button (click)="moveDown(i)">Down</button></div>
+            </div>
+            
+            <textarea #recipeDirections rows="3" cols="45" placeholder="Ex. Mix the flour, cocoa power, eggs, and sugar together." [(ngModel)]="newInstructionLine">{{newInstructionLine}}</textarea><br/>
+            <button (click)="addNewInstruction()">Add New Instruction</button><br/>
+            <label>Please check if no instruction edits.</label>
+            <input type="checkbox"  [(ngModel)]="noChangedInstructions"><br/> 
+            <span class="moreInfo">**If checked, any edits to instructions will not be processed.**</span><br/><br/>
+        </ul>
+
+    </div>
+     <!-- Instructions Composite View-->
+    <div [class.visible]="compositeView===true" [class.hidden]="compositeView===false">
+        <label><span class="required">*</span>Edit recipe instructions. If additional instructions, you can put insert them wherever you want. </label>
+        <br/>
+        <span class="moreInfo">**Please start each instruction on a new line.**</span>
+        <br/>
+        <textarea #recipeDirections [(ngModel)]="allInstructions" rows="10" cols="50" placeholder="Ex. Mix the flour, cocoa power, eggs, and sugar together.">{{allInstructions}}
+        </textarea><br/>
+        <br/>
+            <label>Please check if no instruction edits.</label>
+            <input type="checkbox"  [(ngModel)]="noChangedInstructions"><br/> 
+            <span class="moreInfo">**If checked, any edits to instructions will not be processed.**</span><br/><br/>
+        
+    </div>
+
+    <button (click)="edit()" >
         Edit Recipe
     </button>
 </div>

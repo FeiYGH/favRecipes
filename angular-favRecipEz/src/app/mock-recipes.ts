@@ -11,7 +11,7 @@ export const RECIPES: Recipe[] = [
         cookTime: 30,
         servings: 4,
         publicRecipe: true,
-        // userID: 1,
+        userID: 0,
         calories: 230,
         totalTime:40
     },
@@ -25,7 +25,7 @@ export const RECIPES: Recipe[] = [
         cookTime: 20,
         servings: 4,
         publicRecipe: true,
-        // userID: 1,
+        userID: 0,
         calories: 200,
         totalTime:30
     },
@@ -39,7 +39,7 @@ export const RECIPES: Recipe[] = [
         cookTime: 30,
         servings: 4,
         publicRecipe: true,
-        // userID: 1,
+        userID: 0,
         calories: 230,
         totalTime:40
     },

@@ -1,15 +1,18 @@
 package com.talentpath.favRecipEzSpringBt.daos;
 
+import com.talentpath.favRecipEzSpringBt.exceptions.FavRecipEzDaoException;
 import com.talentpath.favRecipEzSpringBt.models.Ingredient;
 import com.talentpath.favRecipEzSpringBt.models.Instruction;
 import com.talentpath.favRecipEzSpringBt.models.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 import javax.sound.midi.Soundbank;
+import javax.xml.crypto.Data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -81,9 +84,9 @@ public class PostgresDao implements FavRecipEzDao {
     }
 
     @Override
-    public int deleteRecipeIngredients(Integer recipeID) {
+    public int deleteRecipeIngredient(Integer ingredientID) {
         int deletedIngredNumRows = template.update("DELETE FROM public.\"Ingredients\"\n" +
-                "\tWHERE \"recipeID\"="+recipeID+";");
+                "\tWHERE \"ID\"="+ingredientID+";");
         return deletedIngredNumRows;
     }
 
@@ -115,6 +118,42 @@ public class PostgresDao implements FavRecipEzDao {
         String lowerCaseTerm = term;
         return recipesByUser.stream().filter(recipe -> recipe.getTitle().toLowerCase().contains(lowerCaseTerm)).collect(Collectors.toList());
     }
+
+    @Override
+    public void editRecipe(Integer recipeID, Recipe editedRecipe) throws FavRecipEzDaoException{
+        try{
+            int rowsAffected= template.update("UPDATE public.\"Recipes\"\n" +
+                    "\tSET title=?, description=?, category=?, \"foodType\"=?, \"prepTime\"=?, \"cookTime\"=?, servings=?, \"publicRecipe\"=?, calories=?, \"totalTime\"=?\n" +
+                    "\tWHERE \"ID\"=?", editedRecipe.getTitle(), editedRecipe.getDescription(), editedRecipe.getCategory(), editedRecipe.getFoodType(), editedRecipe.getPrepTime(), editedRecipe.getCookTime(), editedRecipe.getServings(), editedRecipe.isPublicRecipe(),editedRecipe.getCalories(), editedRecipe.getTotalTime(), recipeID);
+        }catch(DataAccessException ex){
+            throw new FavRecipEzDaoException("Error while trying to edit recipe: " + ex.getMessage(), ex);
+        }
+    }
+
+    @Override
+    public void updateIngredient(Ingredient ingredient) throws FavRecipEzDaoException {
+        try{
+            int rowsAffected = template.update("UPDATE public.\"Ingredients\"\n" +
+                    "\tSET \"ingredientStr\"=?\n" +
+                    "\tWHERE \"ID\" = ?;", ingredient.getIngredientStr(), ingredient.getID());
+        }catch(DataAccessException ex){
+            throw new FavRecipEzDaoException("Error while updating ingredient to postgres: "+ ex.getMessage(),ex);
+        }
+    }
+
+
+
+    @Override
+    public void updateInstructions(Instruction instruction) throws FavRecipEzDaoException {
+        try{
+            int rowsAffected= template.update("UPDATE public.\"Directions\"\n" +
+                    "\tSET \"instructionLine\"=?\n" +
+                    "\tWHERE \"ID\"=?;", instruction.getInstructionLine(), instruction.getID());
+        }catch(DataAccessException ex){
+            throw new FavRecipEzDaoException("Error while updating instruction to postgres: " + ex.getMessage(), ex);
+        }
+    }
+
 
 
     @Override

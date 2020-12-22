@@ -2,6 +2,7 @@ package com.talentpath.favRecipEzSpringBt.services;
 
 import com.talentpath.favRecipEzSpringBt.daos.FavRecipEzDao;
 import com.talentpath.favRecipEzSpringBt.daos.UserRepository;
+import com.talentpath.favRecipEzSpringBt.exceptions.FavRecipEzDaoException;
 import com.talentpath.favRecipEzSpringBt.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
@@ -26,7 +27,6 @@ public class favRecipEzService {
     }
 
     public List<Recipe> getRecipesByUser(String username) {
-
         Optional<User> userIfExists = userRepo.findByUsername(username);
         try{
             //userIfExists is Optional object, .get() to get the value
@@ -96,8 +96,8 @@ public class favRecipEzService {
         return dao.deleteRecipeInstructions(recipeID);
     }
 
-    public int deleteRecipeIngredients(Integer recipeID) {
-        return dao.deleteRecipeIngredients(recipeID);
+    public int deleteRecipeIngredient(Integer ingredientID) {
+        return dao.deleteRecipeIngredient(ingredientID);
     }
 
     public List<Instruction> getRecipeInstByID(Integer recipeID) {
@@ -123,5 +123,33 @@ public class favRecipEzService {
             System.out.println("No user with that username exists. " + ex);
         }
         return null;
+    }
+
+    public void editRecipe(Integer recipeID, Recipe editedRecipe) throws FavRecipEzDaoException {
+        dao.editRecipe(recipeID, editedRecipe);
+    }
+
+    public void updateRecipeIngredients(List<Ingredient> ingredients) throws FavRecipEzDaoException{
+//        List<Ingredient> updatedIngredients = new ArrayList<>();
+        for(Ingredient ingredient:ingredients){
+            dao.updateIngredient(ingredient);
+//             dao.updatedIngredients.add(updatedIng);
+        }
+//        return updatedIngredients;
+    }
+
+    public void updateRecipeInstructions(List<Instruction> instructions) throws FavRecipEzDaoException {
+        for(Instruction instruction:instructions){
+            dao.updateInstructions(instruction);
+        }
+    }
+
+    public List<Instruction> addRecipeInstructionsFromEdit(List<Instruction> instructions) {
+        List<Instruction> newlyAddedInstructs = new ArrayList<>();
+        int recipeID = instructions.get(0).getRecipeID();
+        for(Instruction instruct : instructions){
+            newlyAddedInstructs.add(dao.addInstruction(instruct));
+        }
+        return newlyAddedInstructs;
     }
 }

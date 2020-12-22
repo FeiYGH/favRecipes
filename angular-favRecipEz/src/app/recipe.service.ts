@@ -104,10 +104,26 @@ export class RecipeService {
   httpOptions = {
     headers: new HttpHeaders({'Content-Type':'application/json'})
   }
+
   updateRecipe(recipe:Recipe): Observable<any>{
-    return this.http.put(this.recipesUrl, recipe, this.httpOptions).pipe(
+    const url = `${this.recipesUrl}/${recipe.id}`;
+    return this.http.put(url, recipe, this.httpOptions).pipe(
       tap(_=> this.log(`updated recipe id =${recipe.id}`)),
       catchError(this.handleError<any>('updateRecipe'))
+    )
+  }
+
+  updateRecipeIngredients(editedIngreds: Ingredient[]):Observable<any>{
+    return this.http.put<void>(this.ingredientsUrl, editedIngreds , this.httpOptions).pipe(
+      tap(() => this.log(`updated ingredients for recpe with id=${editedIngreds[0].id}`)),
+      catchError(this.handleError<void>('updatedRecipeIngredients'))
+    )
+  }
+
+  updateRecipeInstructions(editedInstructs: Instruction[]):Observable<any>{
+    return this.http.put<void>(this.directionsUrl, editedInstructs, this.httpOptions).pipe(
+      tap(()=> this.log(`updated instructions for recipe with id=${editedInstructs[0].recipeID}`)),
+      catchError(this.handleError<void>('updatedRecipeInstructions'))
     )
   }
 
@@ -118,28 +134,46 @@ export class RecipeService {
       )
   }
 
-
-  addRecipeInstructions(ID: number, instructionsArr : string[]):Observable<any> {
+  //recipId is the recipeID 
+  addRecipeInstructions(recipId: number, instructionsArr : string[]):Observable<any> {
     //the response expects back an Instruction array
-    let test1 = ID;
+    let test1 = recipId;
     let test2= instructionsArr;
-    let dirIngredReq: DirIngredRequest = {recipeID: ID, ingredOrInstructLines: instructionsArr};
+    let dirIngredReq: DirIngredRequest = {recipeID: recipId, ingredOrInstructLines: instructionsArr};
     // dirIngredReq.recipeID = ID;
     // dirIngredReq.ingredOrInstructLines = instructionsArr;
     return this.http.post<Instruction[]>(this.directionsUrl, dirIngredReq, this.httpOptions).pipe(
-      tap((newDirections: Instruction[]) => this.log(`added directions to recipe with id=${ID}`)),
+      tap((newDirections: Instruction[]) => this.log(`added directions to recipe with id=${recipId}`)),
       catchError(this.handleError<Instruction[]>('addRecipeDirections'))
     ) 
-    
   }
-  addRecipeIngredients(ID: number, ingredientsArr: string[]) {
+
+  deleteRecipeIngredients(recipeId: number, ingredientsToDelete: Ingredient[]):Observable<number>{
+    let url:string;
+    for(let ingredient of ingredientsToDelete){
+      url = this.ingredientsUrl + "/" + ingredient.id;
+      return this.http.delete<number>(url, this.httpOptions).pipe(
+          tap(() => this.log(`deleted ingredient with id=${ingredient.id} for recipeID=${ingredient.recipeID}`)),
+          catchError(this.handleError<number>('deleteRecipeIngredients'))
+      )
+    }
+  }
+
+  addRecipeInstructionsFromEdit(newInstructions:Instruction[]):Observable<any>{
+    return this.http.post<Instruction[]>(this.directionsUrl + 'FromEdit', newInstructions, this.httpOptions).pipe(
+      tap((newDirs: Instruction[])=> this.log(`added directions in editRecipe with id=${newInstructions[0].recipeID}`)),
+      catchError(this.handleError<Instruction[]>('addedRecipeInstructionsObj from EditRecipe Component'))
+    )
+  }
+
+  
+  //recipId is recipeID
+  addRecipeIngredients(recipId: number, ingredientsArr: string[]) {
     //the response expects back an Ingredients array
-    let test1 =ID;
-    console.log(ID);
     let test2= ingredientsArr;
-    return this.http.post<Ingredient[]>(this.ingredientsUrl, {"recipeID": ID, "ingredOrInstructLines": ingredientsArr}, this.httpOptions).pipe(
+    return this.http.post<Ingredient[]>(this.ingredientsUrl, {"recipeID": recipId, "ingredOrInstructLines": ingredientsArr}, this.httpOptions).pipe(
       tap((newIngredients: Ingredient[]) => {
-        this.log(`added ingredients to recipe with id=${ID}`);
+        this.log(`added ingredients to recipe with id=${recipId}`);
         console.log(newIngredients);
       }),
       

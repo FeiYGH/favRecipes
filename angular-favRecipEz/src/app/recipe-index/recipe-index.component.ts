@@ -27,7 +27,7 @@ export class RecipeIndexComponent implements OnInit {
     cookTime: 30,
     servings: 4,
     publicRecipe: true,
-    // userID: 1,
+    userID: 0,
     calories: 230,
     totalTime:40
   }

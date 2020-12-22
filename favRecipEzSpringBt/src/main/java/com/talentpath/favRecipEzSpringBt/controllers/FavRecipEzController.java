@@ -1,11 +1,13 @@
 package com.talentpath.favRecipEzSpringBt.controllers;
 
+import com.talentpath.favRecipEzSpringBt.exceptions.FavRecipEzDaoException;
 import com.talentpath.favRecipEzSpringBt.models.Ingredient;
 import com.talentpath.favRecipEzSpringBt.models.InstructAndIngredRequest;
 import com.talentpath.favRecipEzSpringBt.models.Instruction;
 import com.talentpath.favRecipEzSpringBt.models.Recipe;
 import com.talentpath.favRecipEzSpringBt.services.favRecipEzService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -46,7 +48,6 @@ public class FavRecipEzController {
     }
 
 
-
     @GetMapping("/recipes/{recipeId}")
     Recipe getRecipeByID(@PathVariable Integer recipeId){
         return service.getRecipeByID(recipeId);
@@ -63,6 +64,12 @@ public class FavRecipEzController {
         return service.getRecipeIngredByID(recipeID);
     }
 
+    @PutMapping("/recipes/{recipeID}")
+    public void editRecipe(@PathVariable Integer recipeID, @RequestBody Recipe editedRecipe) throws FavRecipEzDaoException {
+        service.editRecipe(recipeID, editedRecipe);
+    }
+
+
     @PostMapping("/recipes")
     public Recipe addRecipe(@RequestBody Recipe recipe, Principal principal) {
         return service.addRecipe(recipe, principal.getName());
@@ -78,6 +85,16 @@ public class FavRecipEzController {
         return service.addRecipeInstructions(instructReq);
     }
 
+    @PostMapping("/recipeInstructionsFromEdit")
+    public List<Instruction> addInstructionsToRecipeFromEdit(@RequestBody List<Instruction> newInstructions){
+        return service.addRecipeInstructionsFromEdit(newInstructions);
+    }
+
+    @PutMapping("/recipeInstructions")
+    public void updateInstructionsForRecipe(@RequestBody List<Instruction> instructions) throws FavRecipEzDaoException{
+        service.updateRecipeInstructions(instructions);
+    }
+
     @DeleteMapping("/recipeInstructions/{recipeID}")
     public int deleteInstructionsForRecipe(@PathVariable Integer recipeID){
         return service.deleteRecipeInstructions(recipeID);
@@ -87,16 +104,19 @@ public class FavRecipEzController {
 
     @PostMapping("/recipeIngredients")
     public List<Ingredient> addIngredientsToRecipe(@RequestBody InstructAndIngredRequest ingredReq){
-        String test = "it got here";
-        int num = -7;
         return service.addRecipeIngredients(ingredReq);
     }
 
-    @DeleteMapping("/recipeIngredients/{recipeID}")
-    public int deleteIngredientsForRecipe(@PathVariable Integer recipeID){
+    @PutMapping("/recipeIngredients")
+    public void updateIngredientsToRecipe(@RequestBody List<Ingredient>ingredients) throws FavRecipEzDaoException{
+        service.updateRecipeIngredients(ingredients);
+    }
+
+    @DeleteMapping("/recipeIngredients/{ingredientID}")
+    public int deleteIngredientForRecipe(@PathVariable Integer ingredientID){
         String test = "it got here";
         int num = -7;
-        return service.deleteRecipeIngredients(recipeID);
+        return service.deleteRecipeIngredient(ingredientID);
     }
 
 //    @PostMapping("/recipes")

@@ -76,8 +76,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.DELETE, "/api/recipes/**").authenticated()
 
                     .antMatchers(HttpMethod.GET, "/api/recipesSearch").permitAll()
+                    .antMatchers(HttpMethod.GET, "/api/recipesSearch/").permitAll()
 
-                    .antMatchers(HttpMethod.POST, "/api/recipeInstructions").authenticated()
+
+                .antMatchers(HttpMethod.POST, "/api/recipeInstructions").authenticated()
                     .antMatchers(HttpMethod.POST, "/api/recipeIngredients").authenticated()
                     .antMatchers(HttpMethod.GET, "/api/recipeInstructions/**").permitAll()
                     .antMatchers(HttpMethod.GET, "/api/recipeIngredients/**").permitAll()

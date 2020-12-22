@@ -8,7 +8,7 @@ export interface Recipe{
     cookTime: number;
     servings: number;
     publicRecipe: boolean;
-    // userID: number;
+    userID: number;
     calories: number;
     totalTime: number;
 
