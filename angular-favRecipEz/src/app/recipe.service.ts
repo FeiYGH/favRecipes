@@ -150,13 +150,11 @@ export class RecipeService {
 
   deleteRecipeIngredients(recipeId: number, ingredientsToDelete: Ingredient[]):Observable<number>{
     let url:string;
-    for(let ingredient of ingredientsToDelete){
-      url = this.ingredientsUrl + "/" + ingredient.id;
+    url = this.ingredientsUrl + "/" + recipeId;
       return this.http.delete<number>(url, this.httpOptions).pipe(
-          tap(() => this.log(`deleted ingredient with id=${ingredient.id} for recipeID=${ingredient.recipeID}`)),
+          tap(() => this.log(`deleted ingredients with recipeID=${recipeId}`)),
           catchError(this.handleError<number>('deleteRecipeIngredients'))
       )
-    }
   }
 
   addRecipeInstructionsFromEdit(newInstructions:Instruction[]):Observable<any>{
@@ -226,4 +224,27 @@ export class RecipeService {
       catchError(this.handleError<Recipe[]>('searchRecipes', [])) 
     );
   }
+
+ 
+  deleteIngredient(ingredient: Ingredient | number): Observable<number>{
+    const id = typeof ingredient === 'number' ? ingredient : ingredient.id;
+    const url = `${this.ingredientsUrl}/ind/${id}`;
+    return this.http.delete<number>(url, this.httpOptions).pipe(
+      tap(_ => this.log(`deleted recipe ingredient id=${id}`)),
+      catchError(this.handleError<number>('deleted single Ingredient'))
+    )
+    
+    
+  }
+
+  deleteInstruction(instruction:Instruction | number): Observable<Instruction>{
+    const id = typeof instruction === 'number' ? instruction : instruction.id;
+    const url = `${this.directionsUrl}/ind/${id}`;
+    return this.http.delete<Instruction>(url, this.httpOptions).pipe(
+      tap( _ => this.log(`deleted recipe instruction id=${id}`)),
+      catchError(this.handleError<Instruction>('deleted single Instruction'))
+    )
+  }
+
+
 }

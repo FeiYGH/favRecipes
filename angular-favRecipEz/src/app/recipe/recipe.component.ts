@@ -58,7 +58,16 @@ export class RecipeComponent implements OnInit {
     this.recipeService.getInstForRecipe(id).subscribe(instructions => {
       console.log("instructions!!");   
       console.log(instructions);  
-      this.instructions = instructions;
+      this.instructions = this.putInNumericalOrder(instructions, (inst1: Instruction, inst2: Instruction) => {
+          if(inst1.id > inst2.id){
+            return -1;
+          }else if(inst1.id < inst2.id){
+            return 1;
+          }else{
+            return 0;
+          }
+      });
+
     })
   }
 
@@ -66,9 +75,58 @@ export class RecipeComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.recipeService.getIngredForRecipe(id).subscribe(ingredients =>  {
       console.log(ingredients);
-      this.ingredients = ingredients;
+      this.ingredients = this.putInNumericalOrder(ingredients, (ingred1: Ingredient, ingred2: Ingredient)=>{
+          console.log(typeof ingred1.id);
+          if(ingred1.id > ingred2.id){
+            return -1;
+          }else if(ingred1.id < ingred2.id){
+            return 1;
+          }else{
+            return 0;
+          }
+      })
+
     })
   }
+
+  putInNumericalOrder(objects: Object[], callback:Function):any{
+    let sorted = this.quickSort(objects, callback);
+    console.log("SORTED: ");
+    for(let i = 0 ; i < sorted.length; i++){
+      console.log(sorted[i].id);
+      console.log(sorted[i].instructionLine);
+      console.log(sorted[i].ingredientStr);
+    }
+    return sorted;
+    // return this.quickSort(objects, callback);
+}
+
+defaultCallback = function(el1:number, el2:number){
+  if(el1 > el2){
+    return -1;
+  }else if (el2 > el1){
+    return 1;
+  }else{
+    return 0;
+  }
+}
+
+quickSort = function(array: Object[], callback: Function) {
+    if(array.length < 2) return array;
+    if(!callback)callback= this.defaultCallback;
+    let first:Object = array[0];
+    let leftArr:Object[]=[];
+    let rightArr: Object[] = [];
+    for(let i: number = 1; i < array.length; i++){
+        if(callback(array[i], first )===1){
+            leftArr.push(array[i]);
+        }else{
+          rightArr.push(array[i])
+        }
+    }
+    return this.quickSort(leftArr, callback).concat(first).concat(this.quickSort(rightArr, callback));
+}
+
 
   edit():void{
     this.routr.navigate([`/editRecipe`], {queryParams: {"recipeID": this.recipe.id}})

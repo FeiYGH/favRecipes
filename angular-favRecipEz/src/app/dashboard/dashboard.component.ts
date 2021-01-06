@@ -37,7 +37,7 @@ export class DashboardComponent implements OnInit {
         console.log("Num directions deleted: "+numRowsDeleted );
         this.recipeService.deleteIngredsForRecipe(recipe.id).subscribe((numRowsDel)=>{
           console.log("Successfully deleted ingredients for recipe");
-          console.log("Num ingredients deleted: "+numRowsDel );
+          console.log("Num ingredients deleted: " + numRowsDel );
           this.recipeService.deleteRecipe(recipe.id).subscribe((numRowsD)=> {
             console.log("Successfully deleted recipe with ID=" + recipe.id);
             console.log("Num recipes deleted: "+ numRowsD);

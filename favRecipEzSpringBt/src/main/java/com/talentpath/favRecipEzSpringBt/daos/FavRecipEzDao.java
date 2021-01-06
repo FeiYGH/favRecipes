@@ -26,7 +26,7 @@ public interface FavRecipEzDao {
 
     int deleteRecipeInstructions(Integer recipeID);
 
-    int deleteRecipeIngredient(Integer recipeID);
+    int deleteRecipeIngredients(Integer recipeID);
 
     List<Instruction> getInstByRecipeID(Integer recipeID);
 
@@ -41,4 +41,8 @@ public interface FavRecipEzDao {
     void updateIngredient(Ingredient ingredient) throws FavRecipEzDaoException;
 
     void updateInstructions(Instruction instruction) throws FavRecipEzDaoException;
+
+    int deleteInstruction(Integer instructionID);
+
+    int deleteIngredient(Integer ingredientID);
 }

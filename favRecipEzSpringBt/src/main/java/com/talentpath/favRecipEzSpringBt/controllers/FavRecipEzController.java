@@ -76,9 +76,10 @@ public class FavRecipEzController {
     }
 
     @DeleteMapping("/recipes/{recipeID}")
-        public int deleteRecipe(@PathVariable Integer recipeID){
-            return service.deleteRecipe(recipeID);
-        }
+    public int deleteRecipe(@PathVariable Integer recipeID){
+        System.out.println("In Delete Recipe");
+        return service.deleteRecipe(recipeID);
+    }
 
     @PostMapping("/recipeInstructions")
     public List<Instruction> addInstructionsToRecipe(@RequestBody InstructAndIngredRequest instructReq){
@@ -112,13 +113,22 @@ public class FavRecipEzController {
         service.updateRecipeIngredients(ingredients);
     }
 
-    @DeleteMapping("/recipeIngredients/{ingredientID}")
-    public int deleteIngredientForRecipe(@PathVariable Integer ingredientID){
+    @DeleteMapping("/recipeIngredients/{recipeID}")
+    public int deleteIngredientsForRecipe(@PathVariable Integer recipeID){
         String test = "it got here";
         int num = -7;
-        return service.deleteRecipeIngredient(ingredientID);
+        return service.deleteRecipeIngredients(recipeID);
     }
 
-//    @PostMapping("/recipes")
-//    Recipe addRecipe()
+    @DeleteMapping("/recipeInstructions/ind/{instructionID}")
+    public int deleteInstruction(@PathVariable Integer instructionID){
+        return service.deleteInstruction(instructionID);
+    }
+
+    @DeleteMapping("/recipeIngredients/ind/{ingredientID}")
+    public int deleteIngredient(@PathVariable Integer ingredientID){
+        return service.deleteIngredient(ingredientID);
+    }
+
+
 }

@@ -84,9 +84,9 @@ public class PostgresDao implements FavRecipEzDao {
     }
 
     @Override
-    public int deleteRecipeIngredient(Integer ingredientID) {
+    public int deleteRecipeIngredients(Integer recipeID) {
         int deletedIngredNumRows = template.update("DELETE FROM public.\"Ingredients\"\n" +
-                "\tWHERE \"ID\"="+ingredientID+";");
+                "\tWHERE \"recipeID\"="+recipeID+";");
         return deletedIngredNumRows;
     }
 
@@ -154,6 +154,19 @@ public class PostgresDao implements FavRecipEzDao {
         }
     }
 
+    @Override
+    public int deleteInstruction(Integer instructionID) {
+        int deletedInstructNumRows = template.update("DELETE FROM public.\"Directions\"\n" +
+                "\tWHERE \"ID\"="+instructionID +";");
+        return deletedInstructNumRows;
+    }
+
+    @Override
+    public int deleteIngredient(Integer ingredientID) {
+        int deletedIngredNumRows = template.update("DELETE FROM public.\"Ingredients\"\n" +
+                "\tWHERE \"ID\"="+ingredientID+";");
+        return deletedIngredNumRows;
+    }
 
 
     @Override
@@ -162,6 +175,8 @@ public class PostgresDao implements FavRecipEzDao {
                 new RecipeMapper());
         return retrievedRecipe;
     }
+
+
 
     @Override
     public Recipe addRecipe(Recipe recipe) {

@@ -85,3 +85,49 @@ button{
     .hidden{
         display:none;
     }
+
+    .moveUpDownDiv{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .moveUp{
+        background-image: url("../../../favRecipEz Pictures/blackUpArrow.jpg");
+        background-size: contain;
+        height:20px;
+        width:20px;
+    }
+
+    .moveDown{
+        background-image: url("../../../favRecipEz Pictures/blackDownArrow.jpg");
+        background-size: contain;
+        height:20px;
+        width:20px;
+    }
+
+    .deleteIndIngred, .deleteIndInstruction{
+        display:flex;
+    }
+
+    .deleteButton{
+        display:flex;
+        padding:10px;
+        margin:5px;
+        font-family: Arial, Helvetica, sans-serif;
+        
+        
+    }
+
+    span.deleteIconImg{
+        width:30px;
+        height:30px;
+        background-image: url("../../../favRecipEz Pictures/deleteSign.png");
+        background-size: contain;
+        margin:0px;
+        padding:0px;
+    }
+
+    .changeOrderDiv{
+        display:flex;
+    }

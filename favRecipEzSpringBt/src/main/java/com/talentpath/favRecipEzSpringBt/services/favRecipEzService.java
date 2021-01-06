@@ -96,8 +96,8 @@ public class favRecipEzService {
         return dao.deleteRecipeInstructions(recipeID);
     }
 
-    public int deleteRecipeIngredient(Integer ingredientID) {
-        return dao.deleteRecipeIngredient(ingredientID);
+    public int deleteRecipeIngredients(Integer recipeID) {
+        return dao.deleteRecipeIngredients(recipeID);
     }
 
     public List<Instruction> getRecipeInstByID(Integer recipeID) {
@@ -151,5 +151,13 @@ public class favRecipEzService {
             newlyAddedInstructs.add(dao.addInstruction(instruct));
         }
         return newlyAddedInstructs;
+    }
+
+    public int deleteInstruction(Integer instructionID) {
+        return dao.deleteInstruction(instructionID);
+    }
+
+    public int deleteIngredient(Integer ingredientID) {
+        return dao.deleteIngredient(ingredientID);
     }
 }
