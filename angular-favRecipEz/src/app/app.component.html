@@ -7,6 +7,7 @@
         <a *ngIf routerLink="/addRecipe">AddRecipe</a> &nbsp;
         <a *ngIf="!isLoggedIn()" routerLink="/signin">Sign In</a> &nbsp;
         <a *ngIf="!isLoggedIn()" routerLink="/register">Register</a> &nbsp;
+        <a class="logoutALink" *ngIf="isLoggedIn()" routerLink="/profile">Profile</a>    
         <a class="logoutALink" *ngIf="isLoggedIn()"  (click)="logout()">Log Out</a>    
     </nav>
     <router-outlet></router-outlet>

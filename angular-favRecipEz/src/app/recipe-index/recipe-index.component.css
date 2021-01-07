@@ -23,17 +23,35 @@
 
   .recipes > div:hover{
     border: 2px solid cornsilk;
-      
+  }
+
+  .recipeIndexRecipeTitle{
+      height:50px;
+      margin-top:5px;
+      margin-bottom:10px;
+      /* border:1px solid blue; */
+      border-bottom: 2px solid transparent;
+  }
+
+  .recipeIndexRecipeTitle:hover{
+      border-bottom: 2px solid coral;
+      box-shadow: 3px 3px 5px coral;
+  } 
+
+  .recipeIndexLinks{
+      text-decoration: none;
+      color:floralwhite;
   }
 
   
 
-  .recipeIndexLinks{
-    text-decoration: none;
-    color:floralwhite;
+  .recipeDescription{
+      font-size: 12px;
+      font-style: italic;
+      height:15px;
+      margin-top:0px;
   }
 
-  .recipeIndexLinks:hover{
-      
-      border-bottom: 2px solid coral;
+  .recipeDescription:hover{
+      border-bottom: none;
   }

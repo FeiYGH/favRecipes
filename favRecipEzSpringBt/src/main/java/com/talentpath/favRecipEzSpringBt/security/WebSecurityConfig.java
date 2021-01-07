@@ -99,6 +99,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.PUT, "/api/profiles").authenticated()
                     .antMatchers(HttpMethod.DELETE, "/api/profiles/**").authenticated()
 
+                    .antMatchers(HttpMethod.POST,"/storage/uploadFile").permitAll()
+                    .antMatchers(HttpMethod.DELETE,"/storage/deleteFile").permitAll()
+
                     //default -- at least logged in for endpoint
                     .anyRequest().authenticated().and() //HttpSecurity
                     //pass through the jwtFilter to make sure in right format

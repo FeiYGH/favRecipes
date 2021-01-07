@@ -129,7 +129,11 @@
                 </div>
             </div>
             
-            <textarea #recipeDirections rows="3" cols="45" placeholder="Ex. Mix the flour, cocoa power, eggs, and sugar together." [(ngModel)]="newInstructionLine">{{newInstructionLine}}</textarea><br/>
+            <textarea #addRecipeDirections style="background-color:blanchedalmond;" rows="3" cols="45" 
+                placeholder='Add New Instruction(s) Here. &#10;Start each new instruction on a new line. &#10;Ex. Mix the flour, cocoa power, eggs, and sugar together.'
+                [(ngModel)]="newInstructionLine">
+                {{newInstructionLine}}
+            </textarea><br/>
             <button (click)="addNewInstruction()">Add New Instruction</button><br/>
             <label>Please check if no instruction edits.</label>
             <input type="checkbox"  [(ngModel)]="noChangedInstructions"><br/> 

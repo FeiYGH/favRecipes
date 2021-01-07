@@ -3,8 +3,11 @@
 <ul class="recipes">
     <div *ngFor="let recipe of recipes" >
         <a routerLink="/recipes/{{recipe.id}}" class="recipeIndexLinks">
-            {{recipe.title}}<br/>
-            {{recipe.description}}
+            <h4 class="recipeIndexRecipeTitle">{{recipe.title}}</h4>
+            <p class="recipeDescription">{{recipe.description ? recipe.description : ""}}</p>
+            
+            <img style="width:100%;" src="https://favrecipez.s3-us-west-1.amazonaws.com/1610034181287-colorful-salad.jpg" alt="default img"> 
+
             <!-- <span class="badge">{{recipe.id}}: </span> -->
 
             <!-- <div><span>description: </span>{{recipe.description}}</div>

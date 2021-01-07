@@ -6,8 +6,10 @@
         <a *ngFor="let recipe of recipes" class="col-1-4"
             >
             <div class="module recipe" routerLink="/recipes/{{recipe.id}}"> 
-                <h4>{{recipe.title}}</h4>
+                <h4 class="recipeModuleTitle">{{recipe.title}}</h4>
+                <img style="width:100%;" src="https://favrecipez.s3-us-west-1.amazonaws.com/1610034181287-colorful-salad.jpg" alt="default img"> 
             </div>
+
             <button class="delete" title="delete recipe" (click)="delete(recipe)">
                 Delete
             </button>&nbsp;
@@ -19,8 +21,7 @@
         
     </div>
     <br/>
-    <button class="addRecipeButton" (click)="addRecipe()" >Add a Recipe</button>
-    
+    <button class="addRecipeButton" (click)="addRecipe()">Add a Recipe</button>
     
 </div>
 <div *ngIf="!loggedIn()" class="RecipeBoxDiv">

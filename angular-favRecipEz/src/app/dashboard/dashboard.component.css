@@ -56,14 +56,28 @@ a{
     padding: 10px 10px;
     text-align: center;
     color: #eee;
-    max-height: 120px;
+    /* max-height: 120px; */
     min-width: 120px;
-    height:120px;
+    /* height:120px; */
     background-color: #654321;
     border-radius: 7px;
     
-    
   }
+
+  .recipeModuleTitle{
+    height:35px;
+    margin-top:10px;
+    margin-bottom:10px;
+   
+    border-bottom:2px solid transparent;
+  }
+
+  .recipeModuleTitle:hover{
+    border-bottom: 1px solid #046b6d;
+    box-shadow: 3px 3px 5px #046b6d;
+  }
+
+
 
   .module > h4{
     font-size:13px;
@@ -126,6 +140,7 @@ a{
       /* padding:10px; */
       
     }
+
   }
   @media (max-width: 1024px) {
     .grid {

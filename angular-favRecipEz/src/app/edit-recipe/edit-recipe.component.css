@@ -37,6 +37,8 @@ input[type=text]:focus, input:focus, select:focus, textarea:focus {
 
 }
 
+
+
 label.firstBox{
     background-color:rgba(64, 109, 23, 0.801);
     background-color:floralwhite;
@@ -67,6 +69,8 @@ button{
       margin-right:1px;
   }
 
+  
+
   .addRecipeDetails .requiredStar{
       color:coral;
       margin:10px 2px 10px 0px;
@@ -90,6 +94,7 @@ button{
         display:flex;
         flex-direction: column;
         justify-content: center;
+        
     }
 
     .moveUp{
@@ -97,6 +102,7 @@ button{
         background-size: contain;
         height:20px;
         width:20px;
+        border:2px solid rgba(64, 109, 23, 0.801);
     }
 
     .moveDown{
@@ -104,6 +110,13 @@ button{
         background-size: contain;
         height:20px;
         width:20px;
+        border:2px solid rgba(64, 109, 23, 0.801);
+        
+    }
+
+    .moveUp:hover, .moveDown:hover{
+        background-color:coral;
+        border:2px solid coral;
     }
 
     .deleteIndIngred, .deleteIndInstruction{
