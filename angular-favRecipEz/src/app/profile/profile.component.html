@@ -1,0 +1,37 @@
+<h1 class="userProfileH1">User Profile Page</h1>
+<div class="row">
+    <div class="col-4 profileThird">
+        <img  style="width:100%" src="https://s3.us-west-1.amazonaws.com/favrecipez/1610060058001-profile512.png" alt="profilePic"> 
+    </div>
+    <div class="col-4 profileThird2">
+        <span>
+            <h3>username: {{user.userName}}</h3>
+            <h3>email: {{user.email}}</h3>
+        </span>
+        <span>
+            <img (click)="editProfile()" class="editIcon" style="width:40px;" src="https://s3.us-west-1.amazonaws.com/favrecipez/1610061577883-edit-icon.png" alt="EditIcon" [class.visible]="editProfileIcon===true" [class.hidden]="editProfileIcon===false"/>
+        </span>
+    </div>
+    <div class="col-4 profileThird3" [class.visible]="editProfileInfo===true" [class.hidden]="editProfileInfo===false">
+        <span class="editProfileSect">EDIT PROFILE INFO</span> <br/>
+        <label>Username:</label><br/>
+        <input type="text" placeholder={{user.userName}} [(ngModel)]="user.userName" /><br/>
+        <label>Email:</label><br/>
+        <input type="text" placeholder={{user.email}} [(ngModel)]="user.email" /><br/>
+       
+        <label>Profile Picture:</label><br/>
+        <input type="file" [(ngModel)]="user.profile_pic_url" /><br/>
+        <span>
+            <button>
+                Update profile
+            </button>&emsp; &emsp;
+            <button (click)="closeEdit()">
+                Close 
+            </button>
+        </span>
+        
+
+
+    </div>  
+   
+</div>

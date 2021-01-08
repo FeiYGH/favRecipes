@@ -4,6 +4,7 @@ export class User{
     token:string;
     email:string;
     roles: RoleName[];
+    profile_pic_url:string;
     
     
 }

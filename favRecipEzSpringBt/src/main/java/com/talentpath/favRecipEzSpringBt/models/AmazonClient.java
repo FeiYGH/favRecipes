@@ -24,8 +24,8 @@ public class AmazonClient {
     @Value("${amazonProperties.endpointUrl}")
     private String endpointUrl;
 
-    @Value("${amazonProperties.bucketName}")
-    private String bucketName;
+//    @Value("${amazonProperties.bucketName}")
+    private String bucketName = "favrecipez";
 
     @Value("${amazonProperties.accessKey}")
     private String accessKey;

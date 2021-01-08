@@ -21,6 +21,7 @@ import { SigninComponent } from './signin/signin.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthInterceptor } from './auth-interceptor';
 import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { EditRecipeComponent } from './edit-recipe/edit-recipe.component';
     RecipeSearchComponent,
     SigninComponent,
     RegisterComponent,
-    EditRecipeComponent
+    EditRecipeComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
