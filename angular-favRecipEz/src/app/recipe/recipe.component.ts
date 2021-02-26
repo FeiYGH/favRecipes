@@ -5,7 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {RecipeService} from '../recipe.service';
 import { Instruction } from '../instruction';
-import { Ingredient } from '../Ingredient';
+import { Ingredient } from '../Ingredient'
 import { TokenStorageService } from '../token-storage.service';
 import { User } from '../user';
 

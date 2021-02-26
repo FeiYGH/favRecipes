@@ -11,7 +11,7 @@ public class Instruction {
         this.recipeID = recipeID;
         this.instructionLine =instructionLine;
     }
-    public int getRecipeID() {
+    public Integer getRecipeID() {
         return recipeID;
     }
 

@@ -1,6 +1,6 @@
 package com.talentpath.favRecipEzSpringBt.controllers;
 
-import com.talentpath.favRecipEzSpringBt.exceptions.FavRecipEzDaoException;
+import com.talentpath.favRecipEzSpringBt.exceptions.*;
 import com.talentpath.favRecipEzSpringBt.models.Ingredient;
 import com.talentpath.favRecipEzSpringBt.models.InstructAndIngredRequest;
 import com.talentpath.favRecipEzSpringBt.models.Instruction;
@@ -82,12 +82,12 @@ public class FavRecipEzController {
     }
 
     @PostMapping("/recipeInstructions")
-    public List<Instruction> addInstructionsToRecipe(@RequestBody InstructAndIngredRequest instructReq){
+    public List<Instruction> addInstructionsToRecipe(@RequestBody InstructAndIngredRequest instructReq) throws NullDirectionException, NullDirectionFieldException {
         return service.addRecipeInstructions(instructReq);
     }
 
     @PostMapping("/recipeInstructionsFromEdit")
-    public List<Instruction> addInstructionsToRecipeFromEdit(@RequestBody List<Instruction> newInstructions){
+    public List<Instruction> addInstructionsToRecipeFromEdit(@RequestBody List<Instruction> newInstructions) throws NullDirectionException, NullDirectionFieldException{
         return service.addRecipeInstructionsFromEdit(newInstructions);
     }
 
@@ -104,7 +104,7 @@ public class FavRecipEzController {
 
 
     @PostMapping("/recipeIngredients")
-    public List<Ingredient> addIngredientsToRecipe(@RequestBody InstructAndIngredRequest ingredReq){
+    public List<Ingredient> addIngredientsToRecipe(@RequestBody InstructAndIngredRequest ingredReq) throws NullIngredientException, NullIngredientFieldException {
         return service.addRecipeIngredients(ingredReq);
     }
 

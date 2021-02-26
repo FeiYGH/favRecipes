@@ -1,6 +1,7 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
+  "forceConsistentCasingInFileNames": false,
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
@@ -15,6 +16,7 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    
   }
 }

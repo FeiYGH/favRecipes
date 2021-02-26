@@ -2,7 +2,7 @@ package com.talentpath.favRecipEzSpringBt.services;
 
 import com.talentpath.favRecipEzSpringBt.daos.FavRecipEzDao;
 import com.talentpath.favRecipEzSpringBt.daos.UserRepository;
-import com.talentpath.favRecipEzSpringBt.exceptions.FavRecipEzDaoException;
+import com.talentpath.favRecipEzSpringBt.exceptions.*;
 import com.talentpath.favRecipEzSpringBt.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
@@ -22,6 +22,7 @@ public class favRecipEzService {
     @Autowired
     UserRepository userRepo;
 
+    //this returns all public recipes
     public List<Recipe> getAllRecipes() {
         return dao.getAllRecipes();
     }
@@ -43,8 +44,8 @@ public class favRecipEzService {
     }
 
     public Recipe addRecipe(Recipe recipe, String username) {
-        Optional<User> userIfExists = userRepo.findByUsername(username);
         try{
+            Optional<User> userIfExists = userRepo.findByUsername(username);
             int userID = userIfExists.get().getId();
             recipe.setUserID(userID);
             return dao.addRecipe(recipe);
@@ -60,7 +61,7 @@ public class favRecipEzService {
     }
 
 
-    public List<Instruction> addRecipeInstructions(InstructAndIngredRequest instructReq) {
+    public List<Instruction> addRecipeInstructions(InstructAndIngredRequest instructReq) throws NullDirectionException, NullDirectionFieldException {
         List<Instruction> newInstructions = new ArrayList<>();
         int recipeID = instructReq.getRecipeID();
         String[] instructions = instructReq.getIngredOrInstructLines();
@@ -74,7 +75,7 @@ public class favRecipEzService {
         return newInstructions;
     }
 
-    public List<Ingredient> addRecipeIngredients(InstructAndIngredRequest ingredReq) {
+    public List<Ingredient> addRecipeIngredients(InstructAndIngredRequest ingredReq) throws NullIngredientException, NullIngredientFieldException {
         List<Ingredient> newIngredients = new ArrayList<>();
         int recipeID = ingredReq.getRecipeID();
         String[] ingredients = ingredReq.getIngredOrInstructLines();
@@ -144,7 +145,7 @@ public class favRecipEzService {
         }
     }
 
-    public List<Instruction> addRecipeInstructionsFromEdit(List<Instruction> instructions) {
+    public List<Instruction> addRecipeInstructionsFromEdit(List<Instruction> instructions) throws NullDirectionException, NullDirectionFieldException{
         List<Instruction> newlyAddedInstructs = new ArrayList<>();
         int recipeID = instructions.get(0).getRecipeID();
         for(Instruction instruct : instructions){

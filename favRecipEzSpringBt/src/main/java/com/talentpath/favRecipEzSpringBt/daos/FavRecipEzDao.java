@@ -1,6 +1,6 @@
 package com.talentpath.favRecipEzSpringBt.daos;
 
-import com.talentpath.favRecipEzSpringBt.exceptions.FavRecipEzDaoException;
+import com.talentpath.favRecipEzSpringBt.exceptions.*;
 import com.talentpath.favRecipEzSpringBt.models.Ingredient;
 import com.talentpath.favRecipEzSpringBt.models.Instruction;
 import com.talentpath.favRecipEzSpringBt.models.Recipe;
@@ -18,9 +18,9 @@ public interface FavRecipEzDao {
 
     List<Recipe> getRecipesByUser(Integer userID);
 
-    Instruction addInstruction(Instruction instruction);
+    Instruction addInstruction(Instruction instruction) throws NullDirectionException, NullDirectionFieldException;
 
-    Ingredient addIngredient(Ingredient newIngred);
+    Ingredient addIngredient(Ingredient newIngred) throws NullIngredientException, NullIngredientFieldException;
 
     int deleteRecipe(Integer recipeID);
 
@@ -45,4 +45,7 @@ public interface FavRecipEzDao {
     int deleteInstruction(Integer instructionID);
 
     int deleteIngredient(Integer ingredientID);
+
+    void reset();
+
 }

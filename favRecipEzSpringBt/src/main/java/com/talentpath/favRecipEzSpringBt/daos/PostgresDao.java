@@ -1,12 +1,14 @@
 package com.talentpath.favRecipEzSpringBt.daos;
 
-import com.talentpath.favRecipEzSpringBt.exceptions.FavRecipEzDaoException;
+import com.talentpath.favRecipEzSpringBt.exceptions.*;
 import com.talentpath.favRecipEzSpringBt.models.Ingredient;
 import com.talentpath.favRecipEzSpringBt.models.Instruction;
 import com.talentpath.favRecipEzSpringBt.models.Recipe;
+import com.talentpath.favRecipEzSpringBt.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
@@ -44,10 +46,18 @@ public class PostgresDao implements FavRecipEzDao {
     }
 
     @Override
-    public Instruction addInstruction(Instruction newInstruct) {
-        //      if(line == null){
-        //            throw new NullDirectionException("Received null for direction string.");
-        //
+    public Instruction addInstruction(Instruction newInstruct) throws NullDirectionException, NullDirectionFieldException {
+      if(newInstruct == null) {
+          throw new NullDirectionException("Received null for direction object.");
+      }
+
+      if(newInstruct.getInstructionLine()==null){
+          throw new NullDirectionFieldException("Received null for direction line in direction object.");
+      }
+
+        if(newInstruct.getRecipeID()==null){
+            throw new NullDirectionFieldException("Received null for recipeID in direction object.");
+        }
 
         List<Integer> insertedIds = template.query("INSERT INTO public.\"Directions\"(\n" +
                 "\t\"instructionLine\", \"recipeID\")\n" +
@@ -56,10 +66,18 @@ public class PostgresDao implements FavRecipEzDao {
         return newInstruct;
     }
 
+
     @Override
-    public Ingredient addIngredient(Ingredient newIngred) {
-        //      if(line == null){
-        //            throw new NullIngredientException("Received null for ingredient string.");
+    public Ingredient addIngredient(Ingredient newIngred) throws NullIngredientException, NullIngredientFieldException {
+        if(newIngred == null) {
+            throw new NullIngredientException("Received null for ingredient object.");
+        }
+        if(newIngred.getIngredientStr().equals(null)){
+            throw new NullIngredientFieldException("Ingredient line cannot be null for ingredient object");
+        }
+        if(newIngred.getRecipeID()==null){
+            throw new NullIngredientFieldException("Ingredient recipeID cannot be null for ingredient object.");
+        }
 
         List<Integer> insertedIds = template.query("INSERT INTO public.\"Ingredients\"(\n" +
                 "\t\"ingredientStr\", \"recipeID\")\n" +
@@ -117,6 +135,7 @@ public class PostgresDao implements FavRecipEzDao {
                 "\tWHERE \"userID\" = "+userID+";", new RecipeMapper());
         String lowerCaseTerm = term;
         return recipesByUser.stream().filter(recipe -> recipe.getTitle().toLowerCase().contains(lowerCaseTerm)).collect(Collectors.toList());
+
     }
 
     @Override
@@ -166,6 +185,69 @@ public class PostgresDao implements FavRecipEzDao {
         int deletedIngredNumRows = template.update("DELETE FROM public.\"Ingredients\"\n" +
                 "\tWHERE \"ID\"="+ingredientID+";");
         return deletedIngredNumRows;
+    }
+
+    @Override
+    public void reset() {
+        User user1 = new User("user1", "user1@gmail.com", "password");
+        User user2 = new User("user2", "user2@gmail.com", "password");
+
+
+        Ingredient newIngred1 = new Ingredient(1, "broccoli");
+        Ingredient newIngred2 = new Ingredient(1, "beef");
+
+        Instruction newInstruct1 = new Instruction(1, "Cut the broccoli into florets and cube the beef until they're one inch in diameter.");
+        Instruction newInstruct2 = new Instruction(1, "Stir fry together in a big large saute pan with soy sauce, Charles' Worchester Sauce, and garlic.");
+
+        //truncating tables
+        template.update("TRUNCATE \"users\", \"user_roles\", \"roles\", \"Reviews\", \"ReviewReplies\", \"Recipes\", \"RecipePics\", \"RecipeLikes\", \"Ratings\", \"Ingredients\", \"Directions\"  RESTART IDENTITY");
+
+        //inserting three users, user1, user17, user27
+        template.update("INSERT INTO public.users(\n" +
+                "\temail, password, profile_pic_url, username)\n" +
+                "\tVALUES ('user1@gmail.com', 'password', 'https://www.user1ProfilePic.com', 'user1');");
+
+        template.update("INSERT INTO public.users(\n" +
+                "\temail, password, profile_pic_url, username)\n" +
+                "\tVALUES ('user2@gmail.com', 'password', 'https://www.user2ProfilePic.com', 'user2');");
+
+        template.update("INSERT INTO public.users(\n" +
+                "\temail, password, profile_pic_url, username)\n" +
+                "\tVALUES ('user3@gmail.com', 'password', 'https://www.user3ProfilePic.com', 'user3');");
+
+        //inserting two recipes (Broccoli and Beef - user1, Chicken and Rice - user2)
+        template.update("INSERT INTO public.\"Recipes\"(\n" +
+                "\ttitle, description, category, \"foodType\", \"prepTime\", \"cookTime\", servings, \"publicRecipe\", \"userID\", calories, \"totalTime\")\n" +
+                "\tVALUES ('Broccoli and Beef', 'classic Chinese dish', 'Chinese', 'main course', 10, 20, 200, False, 1, 320, 30);");
+
+        template.update("INSERT INTO public.\"Recipes\"(\n" +
+                "\ttitle, description, category, \"foodType\", \"prepTime\", \"cookTime\", servings, \"publicRecipe\", \"userID\", calories, \"totalTime\")\n" +
+                "\tVALUES ('Chicken and Rice', 'hearty and classic', 'American', 'main course', 10, 25, 220, True, 2, 300, 35);");
+
+        //inserting ingredients into "Broccoli and Beef" and grabbing the IDs from postgres
+        List<Integer> insertedIds1 = template.query("INSERT INTO public.\"Ingredients\"(\n" +
+                "\t\"ingredientStr\", \"recipeID\")\n" +
+                "\tVALUES (?,?) returning \"ID\";",new InstAndIngredIDMapper(), newIngred1.getIngredientStr(), newIngred1.getRecipeID() );
+
+        newIngred1.setID(insertedIds1.get(0));
+
+        List<Integer> insertedIds2 = template.query("INSERT INTO public.\"Ingredients\"(\n" +
+                "\t\"ingredientStr\", \"recipeID\")\n" +
+                "\tVALUES (?,?) returning \"ID\";",new InstAndIngredIDMapper(), newIngred2.getIngredientStr(), newIngred2.getRecipeID() );
+
+        newIngred1.setID(insertedIds2.get(0));
+
+        //inserting directions into "Broccoli and Beef" and grabbing the IDs from postgres
+        List<Integer> insertedIdsDir1 = template.query("INSERT INTO public.\"Directions\"(\n" +
+                "\t\"instructionLine\", \"recipeID\")\n" +
+                "\tVALUES (?,?) returning \"ID\";", new InstAndIngredIDMapper(), newInstruct1.getInstructionLine(), newInstruct1.getRecipeID());
+        newInstruct1.setID(insertedIdsDir1.get(0));
+
+        List<Integer> insertedIdsDir2 = template.query("INSERT INTO public.\"Directions\"(\n" +
+                "\t\"instructionLine\", \"recipeID\")\n" +
+                "\tVALUES (?,?) returning \"ID\";", new InstAndIngredIDMapper(), newInstruct2.getInstructionLine(), newInstruct2.getRecipeID());
+        newInstruct2.setID(insertedIdsDir2.get(0));
+
     }
 
 

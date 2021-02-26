@@ -28,7 +28,7 @@ public class Ingredient {
         this.ingredientStr = ingredientStr;
     }
 
-    public int getRecipeID() {
+    public Integer getRecipeID() {
         return recipeID;
     }
 
